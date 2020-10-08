@@ -57,6 +57,7 @@ def find_directions(col, row):
         valid_directions = SOUTH+WEST
     return valid_directions
 
+
 def play_one_move(col, row, valid_directions):
     ''' Plays one move of the game
         Return if victory has been obtained and updated col,row '''
@@ -71,21 +72,29 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
-def input_lever(row,col):
-    a_tuple=row,col
+
+def input_lever(col,row):
+    a_tuple=col,row
     if a_tuple==(1,2) or a_tuple==(2,2) or a_tuple==(2,3) or a_tuple==(3,2):
-        lever=input('Pull a lever (y/n):')
-    return lever
-    
+        lever=input('Pull a lever (y/n):').lower()
+        return lever
 
 # The main program starts here
 victory = False
 row = 1
 col = 1
+coin=0
+continue_play='y'
+while continue_play=='y':   
+    while not victory:
+        valid_directions = find_directions(col, row)
+        print_directions(valid_directions)
+        victory, col, row= play_one_move(col, row, valid_directions)
+        lever=input_lever(col,row)
+        if lever=='y':
+            coin+=1
+            print('You received 1 coin, your total is now {}.'.format(coin))
+    print("Victory! Total coins {}.".format(coin))
+    continue_play=input('Play again (y/n):')
 
-while not victory:
-    valid_directions = find_directions(col, row)
-    print_directions(valid_directions)
-    victory, col, row = play_one_move(col, row, valid_directions)
-print("Victory!")
 
