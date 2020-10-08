@@ -71,6 +71,13 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
+def input_lever(row,col):
+    a_tuple=row,col
+    if a_tuple==(1,2) or a_tuple==(2,2) or a_tuple==(2,3) or a_tuple==(3,2):
+        lever=input('Pull a lever (y/n):')
+    return lever
+    
+
 # The main program starts here
 victory = False
 row = 1
